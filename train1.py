@@ -16,14 +16,6 @@ from azureml.data.dataset_factory import TabularDatasetFactory
 
 ds = TabularDatasetFactory.from_delimited_files("https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv")
 
-x, y = clean_data(ds)
-
-# TODO: Split data into train and test sets.
-
-X_train, X_test, Y_train, Y_test = train_test_split(x, y)
-
-
-
 run = Run.get_context()
 
 def clean_data(data):
@@ -52,6 +44,11 @@ def clean_data(data):
 
     y_df = x_df.pop("y").apply(lambda s: 1 if s == "yes" else 0)
     
+x, y = clean_data(ds)
+
+# TODO: Split data into train and test sets.
+
+X_train, X_test, Y_train, Y_test = train_test_split(x, y)
 
 def main():
     # Add arguments to script
